@@ -12,13 +12,14 @@ public class AcceptLeave {
 
 	public String acceptLeave(Leave leave) {
 		// TODO Auto-generated method stub
-
+		
+		//Accepting leave request
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Emp_bank");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		try {
 			entityManager.getTransaction().begin();
 			Leave leaves = entityManager.find(Leave.class, leave.getLeaveid());
-			leaves.setStatus("Accepted");
+			leaves.setStatus("Accepted"); // updating Leaves
 			System.out.println("Accepted");
 			entityManager.getTransaction().commit();
 		} finally {
