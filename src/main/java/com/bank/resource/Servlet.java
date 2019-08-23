@@ -57,7 +57,7 @@ public class Servlet extends HttpServlet {
 
 		PrintWriter printWriter = response.getWriter();
 		if (status.equals("error")) {
-			printWriter.println("Wrong credentials");
+			printWriter.println("Wrong credentials"); //Verifying for wrong credentials
 		} else
 			response.sendRedirect(status);
 	}
