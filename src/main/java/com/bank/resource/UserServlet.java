@@ -53,6 +53,8 @@ public class UserServlet extends HttpServlet {
 		String option = request.getParameter("varname");
 		if (option.equals("applyleave"))
 			response.sendRedirect("Apply_Leave.jsp");
+		
+		// View Leaves
 		else if(option.equals("viewleave"))
 		{
 			HttpSession session=request.getSession();
@@ -73,6 +75,8 @@ public class UserServlet extends HttpServlet {
 			dispatch.forward(request, response);
 		}
 		}
+		
+		//Apply Leaves
 		else if(option.equals("apply"))
 		{
 			HttpSession session=request.getSession();
@@ -105,6 +109,8 @@ public class UserServlet extends HttpServlet {
 			System.out.println(status);
 			printWriter.println(status);
 		}
+		
+		//Accepting leave
 		else if(option.equals("accept"))
 		{
 			String id = request.getParameter("id");
@@ -122,6 +128,8 @@ public class UserServlet extends HttpServlet {
 			printWriter.println(status);
 			
 		}
+		
+		//Rejecting leave
 		else if(option.equals("reject"))
 		{
 			String id = request.getParameter("id");
