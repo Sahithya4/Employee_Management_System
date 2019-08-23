@@ -27,12 +27,12 @@ body {text-align: center;background-color:lightgrey;}
 <%
 session=request.getSession();
 String name=(String)session.getAttribute("name");
-String status=(String) session.getAttribute("status");// getting status
+String status=(String) session.getAttribute("status");//Updating status for Employee
 session.removeAttribute("name");
 session.removeAttribute("status");
 if(status==null)
 status="Not Applied yet";%>
 <h3 id="an"><a href="UserServlet?varname=applyleave">Apply for Leave</a></h3>
-Leave status:<%=status %> //Updating status for Employee
+Leave status:<%=status %> 
 </body>
 </html>
