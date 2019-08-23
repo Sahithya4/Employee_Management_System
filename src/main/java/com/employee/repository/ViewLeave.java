@@ -35,7 +35,8 @@ public class ViewLeave {
 					.getResultList();
 			if (list.isEmpty()) {
 			} else {
-				Object[] va = (Object[]) list.get(0);
+				for(int i=0;i<list.size();i++) {
+				Object[] va = (Object[]) list.get(i);
 				System.out.println(Arrays.toString(va));
 
 				result.add(va[0].toString());
@@ -44,6 +45,7 @@ public class ViewLeave {
 				result.add(va[3].toString());
 				result.add(va[4].toString());
 				result.add(va[5].toString());
+			}
 			}
 
 		} // results = (ArrayList<Leave>) quer.getResultList();
