@@ -56,7 +56,6 @@ public class Servlet extends HttpServlet {
 		String status = clientResponse.readEntity(String.class);
 
 		PrintWriter printWriter = response.getWriter();
-		System.out.println(status);
 		if (status.equals("error")) {
 			printWriter.println("Wrong credentials");
 		} else
