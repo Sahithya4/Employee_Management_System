@@ -19,7 +19,7 @@ public class ListSalary {
 			entityManager.getTransaction().begin();
 			TypedQuery<Employee> query = entityManager
 					.createQuery("SELECT e FROM Employee e where salary between 10000 and 20000", Employee.class);
-			results = (ArrayList<Employee>) query.getResultList();
+			results = (ArrayList<Employee>) query.getResultList();  // Getting list of employees whose salary between 10000 to 20000
 			entityManager.getTransaction().commit();
 		} finally {
 			entityManager.close();
