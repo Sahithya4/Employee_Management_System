@@ -44,19 +44,18 @@ public class Servlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Login login = new Login();
 		login.setName(request.getParameter("name"));
-		login.setPassword(request.getParameter("password"));
+		login.setPassword(request.getParameter("password"));  
 
 		HttpSession session = request.getSession();
 		session.setAttribute("name", login.getName());
 		Client client = ClientBuilder.newClient(new ClientConfig());
 		WebTarget webTarget = client.target("http://localhost:8013/EmployeeManagementSystem/webapi/myresource/login");
-
+		
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 		Response clientResponse = invocationBuilder.post(Entity.entity(login, MediaType.APPLICATION_JSON));
 		String status = clientResponse.readEntity(String.class);
 
 		PrintWriter printWriter = response.getWriter();
-		System.out.println(status);
 		if (status.equals("error")) {
 			printWriter.println("Wrong credentials");
 		} else
