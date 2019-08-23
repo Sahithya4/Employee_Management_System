@@ -48,6 +48,7 @@ public class AdminServlet extends HttpServlet {
 		Employee employee =new Employee();
 		Login login=new Login();
 		String option = request.getParameter("varname");
+		//Adding Employee
 		if (option.equals("add"))
 			response.sendRedirect("Add_Employee.jsp");
 		else if(option.equals("adddetails"))
@@ -77,8 +78,8 @@ public class AdminServlet extends HttpServlet {
 			String status=clientResponse.readEntity(String.class);
 			System.out.println(status);
 			printWriter.println(status);
-		//	response.sendRedirect("AdminOperations.jsp");
 		}
+		//Deleting employee
 		else if(option.equals("delete"))
 			response.sendRedirect("Delete.jsp");
 		else if(option.equals("deletedetails"))
@@ -103,6 +104,8 @@ public class AdminServlet extends HttpServlet {
 			printWriter.println(status);
 		    response.sendRedirect("AdminOperations.jsp");
 		}
+		
+		//List of Employees
 		else if(option.equals("employee"))
 		{
 			Client client = ClientBuilder.newClient(new ClientConfig());
@@ -122,6 +125,8 @@ public class AdminServlet extends HttpServlet {
 		{
 			response.sendRedirect("ListOfEmployees.jsp");
 		}
+		
+		//List of departments
 		else if(option.equals("department"))
 		{
 			Client client = ClientBuilder.newClient(new ClientConfig());
@@ -137,6 +142,8 @@ public class AdminServlet extends HttpServlet {
 			request.setAttribute("department", list);
 			dispatch.forward(request, response);
 		}
+		
+		//List of employees working under specific manager
 		else if(option.equals("manager"))
 		{
 			response.sendRedirect("ListReportingTo.jsp");
@@ -160,6 +167,8 @@ public class AdminServlet extends HttpServlet {
 			request.setAttribute("manager", list);
 			dispatch.forward(request, response);
 		}
+		
+		//List of employees whose salary is between 10000 to 20000
 		else if(option.equals("salary"))
 		{
 			Client client = ClientBuilder.newClient(new ClientConfig());
@@ -175,6 +184,7 @@ public class AdminServlet extends HttpServlet {
 			request.setAttribute("salary", list);
 			dispatch.forward(request, response);
 		}
+		//Calculating employees pf
 		else if(option.equals("pf"))
 		{
 			Client client = ClientBuilder.newClient(new ClientConfig());
