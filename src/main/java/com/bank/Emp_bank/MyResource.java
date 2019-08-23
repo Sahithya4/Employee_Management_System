@@ -47,7 +47,8 @@ public class MyResource {
 	HttpSession session;
 	@Context
 	HttpServletRequest request;
-
+	
+	//For login validation
 	@Path("login")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -67,7 +68,8 @@ public class MyResource {
 			return "error";
 
 	}
-
+	
+	//Adding Employee into employee
 	@Path("add")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -77,7 +79,8 @@ public class MyResource {
 		String status = add.addRepository(employee);
 		return status;
 	}
-
+	
+	//Applying for leave by employee
 	@Path("apply")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -87,7 +90,8 @@ public class MyResource {
 		String status = add.applyRepository(leave);
 		return status;
 	}
-
+	
+	//Adding Employee into login and generating password
 	@Path("addlogin")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -97,7 +101,8 @@ public class MyResource {
 		String status = add.addRepository(login);
 		return status;
 	}
-
+	
+	//Deleting Employee
 	@Path("delete")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -107,7 +112,8 @@ public class MyResource {
 		String status = delete.deleteRepository(employee);
 		return status;
 	}
-
+	
+	//Deleting employee's login credentials
 	@Path("deletelogin")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -117,7 +123,8 @@ public class MyResource {
 		String status = delete.deleteRepository(login);
 		return status;
 	}
-
+	
+	//Getting list of employees
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -127,6 +134,7 @@ public class MyResource {
 		return list;
 	}
 
+	//Getting list if departments
 	@Path("department")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -138,6 +146,7 @@ public class MyResource {
 		return list;
 	}
 
+	//Getting employees reporting to specific manager
 	@Path("reporting")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -148,6 +157,7 @@ public class MyResource {
 		return list;
 	}
 
+	//Getting list of employees whose salary between 10000 to 20000
 	@Path("salary")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -158,6 +168,7 @@ public class MyResource {
 		return list;
 	}
 
+	//Calculating employees pf
 	@Path("pf")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -167,7 +178,8 @@ public class MyResource {
 		ArrayList<Employee> list = pfcalculation.pfCalculation();
 		return list;
 	}
-
+	
+	//Manager viewing leaves by his/her employees
 	@Path("leave")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -179,6 +191,7 @@ public class MyResource {
 		return viewLeave.viewLeave(name);
 	}
 
+	//Accepting leave
 	@Path("accept")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -188,6 +201,7 @@ public class MyResource {
 		return acceptLeave.acceptLeave(leave);
 	}
 
+	//Rejecting leave
 	@Path("reject")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
