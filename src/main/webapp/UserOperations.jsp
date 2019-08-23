@@ -26,7 +26,11 @@ body {text-align: center;background-color:lightgrey;}
 <body>
 <%
 session=request.getSession();
-String name=(String)session.getAttribute("name"); System.out.println(name);%>
+String name=(String)session.getAttribute("name");
+String status=(String) session.getAttribute("status");
+if(status==null)
+status="Not Applied yet";%>
 <h3 id="an"><a href="UserServlet?varname=applyleave">Apply for Leave</a></h3>
+Leave status:<%=status %>
 </body>
 </html>
