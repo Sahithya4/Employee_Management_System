@@ -51,13 +51,13 @@ public class UserServlet extends HttpServlet {
 		Login login=new Login();
 		Leave leave =new Leave();
 		String option = request.getParameter("varname");
+		HttpSession session=request.getSession();
+		session.setAttribute("status", "pending");
 		if (option.equals("applyleave"))
 			response.sendRedirect("Apply_Leave.jsp");
-		
-		// View Leaves
 		else if(option.equals("viewleave"))
 		{
-			HttpSession session=request.getSession();
+			session=request.getSession();
 			String name=(String) session.getAttribute("name");
 			System.out.println(name);
 			login.setName(name);
@@ -75,13 +75,24 @@ public class UserServlet extends HttpServlet {
 			dispatch.forward(request, response);
 		}
 		}
-		
-		//Apply Leaves
+		else if(option.equals("cancel"))
+		{
+			session=request.getSession();
+			String name=(String)session.getAttribute("name");
+			leave.setName(name);
+			Client client = ClientBuilder.newClient(new ClientConfig());
+			WebTarget webTarget = client.target("http://localhost:8013/EmployeeManagementSystem/webapi/myresource/cancel");
+
+			Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+			Response clientResponse = invocationBuilder.post(Entity.entity(leave, MediaType.APPLICATION_JSON));
+			
+			String status=clientResponse.readEntity(String.class);
+			printWriter.println(status);
+			session.setAttribute("status", "canceled");
+		}
 		else if(option.equals("apply"))
 		{
-			HttpSession session=request.getSession();
 			String name=(String) session.getAttribute("name");
-			System.out.println(name);
 			String startdate=request.getParameter("sd");
 			String enddate = request.getParameter("ed");
 			Date date;
@@ -92,7 +103,6 @@ public class UserServlet extends HttpServlet {
 				leave.setEnddate(date);
 				leave.setReason(request.getParameter("reason"));
 				leave.setStatus("pending");
-				System.out.println(name);
 				leave.setName(name);
 				
 			} catch (ParseException e) {
@@ -109,8 +119,6 @@ public class UserServlet extends HttpServlet {
 			System.out.println(status);
 			printWriter.println(status);
 		}
-		
-		//Accepting leave
 		else if(option.equals("accept"))
 		{
 			String id = request.getParameter("id");
@@ -126,16 +134,15 @@ public class UserServlet extends HttpServlet {
 			String status=clientResponse.readEntity(String.class);
 			System.out.println(status);
 			printWriter.println(status);
-			
+			session.setAttribute("status", "accepted");
 		}
-		
-		//Rejecting leave
 		else if(option.equals("reject"))
 		{
 			String id = request.getParameter("id");
 			int leaveid=Integer.parseInt(id);
 			printWriter.println(id);
 			leave.setLeaveid(leaveid);
+			
 			Client client = ClientBuilder.newClient(new ClientConfig());
 			WebTarget webTarget = client.target("http://localhost:8013/EmployeeManagementSystem/webapi/myresource/reject");
 
@@ -145,7 +152,7 @@ public class UserServlet extends HttpServlet {
 			String status=clientResponse.readEntity(String.class);
 			System.out.println(status);
 			printWriter.println(status);
-			
+			session.setAttribute("status", "rejected");
 		}
 		
 	}
