@@ -24,7 +24,20 @@ body {text-align: center;background-color:lightgrey;}
 </style>
 </head>
 <body>
+<%
+session=request.getSession();
+String name=(String)session.getAttribute("name");
+String status=(String) session.getAttribute("status");
+if(status==null)
+status="Not Applied yet";
+else if(status.equals("pending"))
+{
+	%><a href="UserServlet?varname=cancel">Cancel Leave</a>
+<%
+}
+%>
 <h3 id="an"><a href="UserServlet?varname=applyleave">Apply for Leave</a></h3>
 <h3 id="an"><a href="UserServlet?varname=viewleave">View Leaves</a></h3>
+Leave status:<%=status %>
 </body>
 </html>
