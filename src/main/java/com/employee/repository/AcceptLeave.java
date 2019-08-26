@@ -19,8 +19,7 @@ public class AcceptLeave {
 		try {
 			entityManager.getTransaction().begin();
 			Leave leaves = entityManager.find(Leave.class, leave.getLeaveid());
-			leaves.setStatus("Accepted"); // updating Leaves
-			System.out.println("Accepted");
+			leaves.setStatus("Accepted"); // updating Leaves and status to accepted
 			entityManager.getTransaction().commit();
 		} finally {
 			entityManager.close();
