@@ -91,6 +91,17 @@ public class MyResource {
 		return status;
 	}
 	
+	//Cancel leave
+	@Path("cancel")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String cancel(Leave leave) {
+		CancelRepository cancel = new CancelRepository();
+		String status = cancel.cancelRepository(leave);
+		return status;
+	}
+
 	//Adding Employee into login and generating password
 	@Path("addlogin")
 	@POST
