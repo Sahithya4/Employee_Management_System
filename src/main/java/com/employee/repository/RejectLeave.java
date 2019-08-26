@@ -16,8 +16,7 @@ public class RejectLeave {
 		try {
 			entityManager.getTransaction().begin();
 			Leave leaves = entityManager.find(Leave.class, leave.getLeaveid());
-			leaves.setStatus("Rejected");
-			System.out.println("Rejected");
+			leaves.setStatus("Rejected");//status will be updated to rejected
 			entityManager.getTransaction().commit();
 		} finally {
 			entityManager.close();
